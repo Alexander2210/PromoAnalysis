@@ -19,5 +19,6 @@ import lombok.Builder;
 public class CustomerEntity {
     @Id
     private String shipToCode;
+    private String address;
     private String chainName;
 }

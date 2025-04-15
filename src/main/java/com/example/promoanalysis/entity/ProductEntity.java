@@ -20,6 +20,6 @@ public class ProductEntity {
     @Id
     private String productCode;
     private String productName;
-    private String categoryCode;
+    private String categoryName;
     private String brandName;
 }
