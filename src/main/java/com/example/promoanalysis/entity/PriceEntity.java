@@ -36,6 +36,6 @@ public class PriceEntity {
     )
     private ProductEntity product;
 
-    @Column(name = "base_price", nullable = false)
+    @Column(name = "regular_price", nullable = false)
     private BigDecimal regularPricePerUnit;
 }

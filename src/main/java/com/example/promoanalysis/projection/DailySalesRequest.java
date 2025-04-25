@@ -1,4 +1,4 @@
-package com.example.promoanalysis.dto;
+package com.example.promoanalysis.projection;
 
 import java.util.List;
 

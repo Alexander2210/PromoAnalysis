@@ -1,9 +1,9 @@
-package com.example.promoanalysis.dto;
+package com.example.promoanalysis.projection;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public interface PromoStatsDto {
+public interface PromoStatsProjection {
     String getChainName();
     String getCategoryName();
     LocalDate getMonth();

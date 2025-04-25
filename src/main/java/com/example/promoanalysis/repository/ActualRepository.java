@@ -1,7 +1,7 @@
 package com.example.promoanalysis.repository;
 
-import com.example.promoanalysis.dto.DailySalesDto;
-import com.example.promoanalysis.dto.PromoStatsDto;
+import com.example.promoanalysis.projection.DailySalesProjection;
+import com.example.promoanalysis.projection.PromoStatsProjection;
 import com.example.promoanalysis.entity.ActualEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,7 +27,7 @@ public interface ActualRepository extends JpaRepository<ActualEntity, Long> {
                     LEFT JOIN products p ON a.product_code = p.product_code
                     GROUP BY chainName, categoryName, month
                     ORDER BY chainName, categoryName, month""", nativeQuery = true)
-    List<PromoStatsDto> getPromoStatsAggregated();
+    List<PromoStatsProjection> getPromoStatsAggregated();
 
     @Query(value = """
         SELECT 
@@ -41,9 +41,10 @@ public interface ActualRepository extends JpaRepository<ActualEntity, Long> {
         FROM actuals a
         JOIN customers c ON a.ship_to_code = c.ship_to_code
         JOIN products p ON a.product_code = p.product_code
-        WHERE c.chain_name = ANY(:chains)
-          AND p.product_code = ANY(:products)
+        WHERE c.chain_name IN (:chains)
+          AND p.product_code IN (:products)
         ORDER BY a.date
         """, nativeQuery = true)
-    List<DailySalesDto> getDailySalesFiltered(@Param("chains") String[] chains, @Param("products") String[] products);
+    List<DailySalesProjection> getDailySalesFiltered(@Param("chains") List<String> chains,
+                                                     @Param("products") List<String> products);
 }
